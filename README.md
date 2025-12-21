@@ -17,7 +17,7 @@ This project is an sales database designed using SQL.
 - Primary & Foreign keys
 - Sample INSERT data
 - UPDATE operations
-- Real-life e-commerce scenarios
+- Real-life sales scenarios
 
 ## How to Run
 1. Create a database (PostgreSQL recommended)
