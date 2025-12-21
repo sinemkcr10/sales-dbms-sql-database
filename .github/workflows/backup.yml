@@ -1,0 +1,27 @@
+name: Günlük Supabase Yedeği
+on:
+  schedule:
+    - cron: '0 0 * * *' # Her gece 00:00'da çalışır
+  workflow_dispatch:
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Veritabanını Yedekle
+        run: |
+          supabase db dump --db-url "$SUPABASE_DB_URL" -f supabase_yedek.sql
+      - name: GitHub'a Gönder
+        run: |
+          git config --global user.name "Yedek Botu"
+          git config --global user.email "bot@github.com"
+          git add supabase_yedek.sql
+          git commit -m "Otomatik veritabanı yedeği" || exit 0
+          git push
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
