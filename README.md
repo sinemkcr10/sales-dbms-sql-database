@@ -21,7 +21,7 @@ This project is an sales database designed using SQL.
 
 ## How to Run
 1. Create a database (PostgreSQL recommended)
-2. Open `ecommerce.sql`
+2. Open `salesdbms.sql`
 3. Execute all queries
 
 ## Author
